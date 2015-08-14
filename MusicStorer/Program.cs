@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NDatabase;
 using TagLib;
 using TagFile = TagLib.File;
 namespace MusicStorer
@@ -17,8 +18,16 @@ namespace MusicStorer
         static void Main(string[] args)
         {
             liste = new ConcurrentBag<TagFile>();
+            
             ProcessFolder(oriPath);
             Console.WriteLine(liste.Count);
+            using (var db = OdbFactory.Open("yolo"))
+            {
+                foreach (var element in liste)
+                {
+                    db.Store(element);
+                }
+            }
             Console.ReadLine();
         }
 
