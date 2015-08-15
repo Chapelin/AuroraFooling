@@ -11,16 +11,16 @@ namespace MusicStorer
 {
     class Program
     {
-        private static ConcurrentBag<TagFile> liste;
-        private static string oriPath = @"\\NAS-PERSO\Volume_1\Musique\secret of mana\secret of mana";
+        private static ConcurrentBag<MusicInfo> liste;
+        private static string oriPath = @"\\NAS-PERSO\Volume_1\Musique\";
         private static List<string> validExtensions = new List<string>() { ".MP3", ".FLAC" };
         private static DataService service;
 
         private static void Main(string[] args)
         {
             service = new DataService();
-            liste = new ConcurrentBag<TagFile>();
-            service.Clean<TagFile>();
+            liste = new ConcurrentBag<MusicInfo>();
+            service.Clean<MusicInfo>();
             ProcessFolder(oriPath);
             Console.WriteLine(liste.Count);
 
@@ -28,7 +28,7 @@ namespace MusicStorer
 
             Console.ReadLine();
 
-            foreach (var title in service.GetAll<TagFile>().Select(x => x.Tag.Title))
+            foreach (var title in service.GetAll<MusicInfo>().Select(x => x.Title))
             {
                 Console.WriteLine(title);
             }
@@ -54,7 +54,7 @@ namespace MusicStorer
                 {
                     var tagFile = GetTagFile(filePath);
 
-                    liste.Add(tagFile);
+                    liste.Add(MusicInfoFactory.CreateMusicInfo(tagFile));
                 }
                 catch (Exception e)
                 {
@@ -65,11 +65,13 @@ namespace MusicStorer
 
         private static TagFile GetTagFile(string filePath)
         {
-
-            Stream s = System.IO.File.Open(filePath, FileMode.Open);
-            var fsa = new StreamFileAbstraction(Path.GetFileName(filePath), s, s);
-            var tagFile = TagFile.Create(fsa);
-            return tagFile;
+            TagFile tg;
+            using (var s = System.IO.File.Open(filePath, FileMode.Open))
+            {
+                var fsa = new StreamFileAbstraction(Path.GetFileName(filePath), s, s);
+                tg = TagFile.Create(fsa);
+            }
+            return tg;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using NDatabase;
 using NDatabase.Api;
 
@@ -41,14 +42,15 @@ namespace DbAccess
             return true;
         }
 
-        public bool AddRange<T>(IEnumerable<T> objets) where T : class
+        public void AddRange<T>(IEnumerable<T> objets) where T : class
         {
-            var result = true;
-            foreach (var objet in objets)
+         
+            Parallel.ForEach(objets, objet =>
             {
-                result &= this.Add(objet);
-            }
-            return result;
+                this.Add(objet);
+            });
+            
+           
         }
 
         public void Clean<T>() where T : class
