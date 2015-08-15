@@ -3,33 +3,40 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using NDatabase;
 using TagLib;
 using TagFile = TagLib.File;
+using DbAccess;
 namespace MusicStorer
 {
     class Program
     {
         private static ConcurrentBag<TagFile> liste;
         private static string oriPath = @"\\NAS-PERSO\Volume_1\Musique\secret of mana\secret of mana";
-        private static List<string>  validExtensions = new List<string>() {".MP3",".FLAC"};
-        static void Main(string[] args)
+        private static List<string> validExtensions = new List<string>() { ".MP3", ".FLAC" };
+        private static DataService service;
+
+        private static void Main(string[] args)
         {
+            service = new DataService();
             liste = new ConcurrentBag<TagFile>();
-            
+            service.Clean<TagFile>();
             ProcessFolder(oriPath);
             Console.WriteLine(liste.Count);
-            using (var db = OdbFactory.Open("yolo"))
-            {
-                foreach (var element in liste)
-                {
-                    db.Store(element);
-                }
-            }
+
+            service.AddRange(liste.ToList());
+
             Console.ReadLine();
+
+            foreach (var title in service.GetAll<TagFile>().Select(x => x.Tag.Title))
+            {
+                Console.WriteLine(title);
+            }
+
+            Console.ReadLine();
+
         }
+
 
         public static void ProcessFolder(string folderPath)
         {
@@ -51,14 +58,14 @@ namespace MusicStorer
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Erreur sur "+filePath);
+                    Console.WriteLine("Erreur sur " + filePath);
                 }
             }
         }
 
         private static TagFile GetTagFile(string filePath)
         {
-            
+
             Stream s = System.IO.File.Open(filePath, FileMode.Open);
             var fsa = new StreamFileAbstraction(Path.GetFileName(filePath), s, s);
             var tagFile = TagFile.Create(fsa);

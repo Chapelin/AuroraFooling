@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NDatabase;
 using TagLib;
 using File = System.IO.File;
 
@@ -13,18 +14,9 @@ namespace TagReader
     {
         static void Main(string[] args)
         {
-            var path = @"\\NAS-PERSO\Volume_1\Musique\Lamb of God\(2009) Wrath";
-
-            var list = Directory.EnumerateFiles(path, "*.mp3");
-            foreach (var file in list)
+            using (var db = OdbFactory.Open("yolo"))
             {
-                Stream s = System.IO.File.Open(file, FileMode.Open);
-                var fsa = new StreamFileAbstraction(Path.GetFileName(file), s, s);
-                var tagFile = TagLib.File.Create(fsa);
-
-                var tags = tagFile.GetTag(TagTypes.Id3v2);
-                Console.WriteLine();
-            }
+                db.
         }
     }
 }
