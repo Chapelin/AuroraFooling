@@ -10,7 +10,7 @@ namespace ServeurSide.Controllers
        
         public IEnumerable<MusicInfo> Get()
         {
-            return musicService.GetAll();
+            return musicService.GetAll< MusicInfo>();
         }
 
         [HttpGet]

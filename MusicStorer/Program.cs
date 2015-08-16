@@ -28,7 +28,7 @@ namespace MusicStorer
 
             Console.ReadLine();
 
-            foreach (var title in service.GetAll().Select(x => x.Title))
+            foreach (var title in service.GetAll< MusicInfo>().Select(x => x.Title))
             {
                 Console.WriteLine(title);
             }
