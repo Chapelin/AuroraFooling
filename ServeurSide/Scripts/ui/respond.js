@@ -122,7 +122,7 @@ window.matchMedia = window.matchMedia || (function(doc, undefined){
 		translate			= function( styles, href, media ){
 			var qs			= styles.match(  /@media[^\{]+\{([^\{\}]*\{[^\}\{]*\})+/gi ),
 				ql			= qs && qs.length || 0,
-				//try to get CSS path
+				//try to get CSS Path
 				href		= href.substring( 0, href.lastIndexOf( "/" )),
 				repUrls		= function( css ){
 					return css.replace( /(url\()['"]?([^\/\)'"][^:\)'"]+)['"]?(\))/g, "$1" + href + "$2$3" );
@@ -132,7 +132,7 @@ window.matchMedia = window.matchMedia || (function(doc, undefined){
 				i			= 0,
 				j, fullq, thisq, eachq, eql;
 
-			//if path exists, tack on trailing slash
+			//if Path exists, tack on trailing slash
 			if( href.length ){ href += "/"; }	
 				
 			//if no internal queries exist, but media attr does, use that	

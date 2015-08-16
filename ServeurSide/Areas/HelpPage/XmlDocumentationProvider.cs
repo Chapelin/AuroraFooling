@@ -24,7 +24,7 @@ namespace ServeurSide.Areas.HelpPage
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlDocumentationProvider"/> class.
         /// </summary>
-        /// <param name="documentPath">The physical path to XML document.</param>
+        /// <param name="documentPath">The physical Path to XML document.</param>
         public XmlDocumentationProvider(string documentPath)
         {
             if (documentPath == null)

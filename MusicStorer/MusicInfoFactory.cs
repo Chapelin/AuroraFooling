@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DbAccess;
 using TagLib;
 
 namespace MusicStorer
 {
     public static class MusicInfoFactory
     {
-        public static MusicInfo CreateMusicInfo(File f)
+        public static MusicInfo CreateMusicInfo(File f, string path)
         {
-            var mi = new MusicInfo();
-            mi.Album = f.Tag.Album;
-            mi.Artist = f.Tag.FirstAlbumArtist;
-            mi.AudioRate = f.Properties.AudioBitrate;
-            mi.Genre = f.Tag.JoinedGenres;
-            mi.Title = f.Tag.Title;
-            mi.Track = (int) f.Tag.Track;
-            mi.Year = (int) f.Tag.Year;
+            
+            var mi = new MusicInfo
+            {
+                Album = f.Tag.Album,
+                Artist = f.Tag.FirstAlbumArtist,
+                AudioRate = f.Properties.AudioBitrate,
+                Genre = f.Tag.JoinedGenres,
+                Title = f.Tag.Title,
+                Track = (int) f.Tag.Track,
+                Year = (int) f.Tag.Year,
+                Path = path
+            };
             return mi;
 
         }

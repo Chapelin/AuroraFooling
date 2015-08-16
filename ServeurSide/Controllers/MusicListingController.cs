@@ -1,25 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using DbAccess;
 using Microsoft.Practices.Unity;
-using ServeurSide.DTO;
-using ServeurSide.Services;
 
 namespace ServeurSide.Controllers
 {
     public class MusicListingController : ApiController
     {
         [Dependency]
-        public IMusicService musicService { get; set; }
+        public static DataService musicService { get; set; }
 
      
-        public MusicListingController()
+        static MusicListingController()
         {
-            this.musicService = new MusicService();
+            musicService = new DataService();
         }
 
-        public List<Music> Get()
+        public MusicListingController() { }
+
+        public IEnumerable<MusicInfo> Get()
         {
-            return musicService.ListOfMusic;
+            return musicService.GetAll();
         } 
     }
 }

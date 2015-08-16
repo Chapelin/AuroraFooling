@@ -1,39 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using SQLite;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using NDatabase;
-using NDatabase.Api;
 
 namespace DbAccess
 {
     public class DataService
     {
-        private IOdb _database;
+        private SQLiteConnection dbConnection;
 
+        //static DataService()
+        //{
+        //    if (!System.IO.File.Exists(Configuration.DatabasePath))
+        //    {
+        //        SQLiteConnection.CreateFile(Configuration.DatabasePath);
+                
+        //    }
+        //}
 
+        public DataService()
+        {
+            this.dbConnection = new SQLiteConnection(Configuration.DatabasePath);
+            this.dbConnection.CreateTable<MusicInfo>();
+;        }
         public void OpenDatabaseIfNecessary()
         {
-            if (this._database == null || this._database.IsClosed())
-            {
-                this.OpenDataBase();
-            }
+           
+            //if (this.dbConnection != ConnectionState.Open)
+            //{
+            //    this.OpenDataBase();
+            //}
         }
 
         public void OpenDataBase()
         {
-            this._database = OdbFactory.Open(Configuration.ConnectionString);
+            //this.dbConnection.Open();
         }
 
-        public bool Add<T>(T objet) where T : class
+        public bool Add(MusicInfo objet)
         {
             try
             {
                 this.OpenDatabaseIfNecessary();
-                this._database.Store<T>(objet);
+                this.dbConnection.Insert(objet);
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
 
@@ -42,37 +57,28 @@ namespace DbAccess
             return true;
         }
 
-        public void AddRange<T>(IEnumerable<T> objets) where T : class
-        {
-         
-            Parallel.ForEach(objets, objet =>
-            {
-                this.Add(objet);
-            });
-            
-           
-        }
-
-        public void Clean<T>() where T : class
+        public void AddRange(IEnumerable<MusicInfo> objets)
         {
             this.OpenDatabaseIfNecessary();
-            var listId = this._database.QueryAndExecute<T>();
-            foreach (var oid in listId)
-            {
-                this._database.Delete(oid);
-            }
+            this.dbConnection.InsertAll(objets);
         }
 
-        public IEnumerable<T> GetAll<T>() where T : class
+        public void Clean() 
         {
             this.OpenDatabaseIfNecessary();
-            return this._database.QueryAndExecute<T>();
+            this.dbConnection.DeleteAll<MusicInfo>();
         }
 
-        public IEnumerable<T> Query<T>(Func<T, bool> condition) where T : class
+        public IEnumerable<MusicInfo> GetAll()
         {
             this.OpenDatabaseIfNecessary();
-            return this._database.QueryAndExecute<T>().Where(condition);
+            return this.dbConnection.Table<MusicInfo>().AsEnumerable();
+        }
+
+        public IEnumerable<MusicInfo> Query(Func<MusicInfo, bool> condition)
+        {
+            this.OpenDatabaseIfNecessary();
+            return this.dbConnection.Table<MusicInfo>().Where(condition);
 
         }
 

@@ -1,7 +1,6 @@
 using System;
 using Microsoft.Practices.Unity;
 using ServeurSide.Controllers;
-using ServeurSide.Services;
 
 namespace ServeurSide.App_Start
 {

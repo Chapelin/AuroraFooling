@@ -1,4 +1,4 @@
-﻿/// <reference path="aurora.d.ts" />
+﻿
 var player: AV.Player;
 player = AV.Player.fromURL("http://localhost:50522/Content/music.flac");
 

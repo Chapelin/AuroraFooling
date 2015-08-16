@@ -20,7 +20,7 @@ namespace MusicStorer
         {
             service = new DataService();
             liste = new ConcurrentBag<MusicInfo>();
-            service.Clean<MusicInfo>();
+            service.Clean();
             ProcessFolder(oriPath);
             Console.WriteLine(liste.Count);
 
@@ -28,7 +28,7 @@ namespace MusicStorer
 
             Console.ReadLine();
 
-            foreach (var title in service.GetAll<MusicInfo>().Select(x => x.Title))
+            foreach (var title in service.GetAll().Select(x => x.Title))
             {
                 Console.WriteLine(title);
             }
@@ -54,7 +54,7 @@ namespace MusicStorer
                 {
                     var tagFile = GetTagFile(filePath);
 
-                    liste.Add(MusicInfoFactory.CreateMusicInfo(tagFile));
+                    liste.Add(MusicInfoFactory.CreateMusicInfo(tagFile,filePath));
                 }
                 catch (Exception e)
                 {
