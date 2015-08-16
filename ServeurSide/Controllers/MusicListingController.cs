@@ -5,22 +5,27 @@ using Microsoft.Practices.Unity;
 
 namespace ServeurSide.Controllers
 {
-    public class MusicListingController : ApiController
+    public class MusicListingController : BaseSonicController
     {
-        [Dependency]
-        public static DataService musicService { get; set; }
-
-     
-        static MusicListingController()
-        {
-            musicService = new DataService();
-        }
-
-        public MusicListingController() { }
-
+       
         public IEnumerable<MusicInfo> Get()
         {
             return musicService.GetAll();
-        } 
+        }
+
+        [HttpGet]
+        [ActionName("ByArtist")]
+        public IEnumerable<MusicInfo> GetByArtist(string id)
+        {
+            return musicService.Query(x => x.Artist == id);
+        }
+
+        [HttpGet]
+        [ActionName("ByAlbum")]
+        public IEnumerable<MusicInfo> GetByAlbum(string id)
+        {
+            return musicService.Query(x => x.Album == id);
+        }
+
     }
 }
