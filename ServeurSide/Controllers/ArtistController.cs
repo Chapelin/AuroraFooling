@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using DbAccess;
 
 namespace ServeurSide.Controllers
 {
@@ -12,7 +13,7 @@ namespace ServeurSide.Controllers
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
-            return musicService.GetAll().Select(x=> x.Artist).Distinct();
+            return musicService.GetAll<MusicInfo>().Select(x=> x.Artist).Distinct();
         }
 
        

@@ -53,7 +53,15 @@ namespace MusicStorer
                 try
                 {
                     var tagFile = GetTagFile(filePath);
-
+                    if (string.IsNullOrWhiteSpace(tagFile.Tag.Album))
+                    {
+                        Console.WriteLine("PAs d'album pour "+filePath);
+                    }
+                 
+                    if (string.IsNullOrWhiteSpace(tagFile.Tag.Title))
+                    {
+                        Console.WriteLine("PAs de titre pour " + filePath);
+                    }
                     liste.Add(MusicInfoFactory.CreateMusicInfo(tagFile,filePath));
                 }
                 catch (Exception e)

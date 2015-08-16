@@ -51,9 +51,15 @@ namespace DbAccess
             this.dbConnection.DeleteAll<MusicInfo>();
         }
 
-        public IEnumerable<MusicInfo> GetAll()
+        public IEnumerable<T> GetAll<T>() where T : new() 
         {
-            return this.dbConnection.Table<MusicInfo>().AsEnumerable();
+            return this.dbConnection.Table<T>().AsEnumerable();
+        }
+
+        public IEnumerable<T> Query<T>(Func<MusicInfo, bool> condition, Func<MusicInfo,T> select)
+        {
+            return this.dbConnection.Table<MusicInfo>().Where(condition).Select(select);
+
         }
 
         public IEnumerable<MusicInfo> Query(Func<MusicInfo, bool> condition)
@@ -62,5 +68,6 @@ namespace DbAccess
 
         }
 
+      
     }
 }

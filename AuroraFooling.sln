@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServeurSide", "ServeurSide\ServeurSide.csproj", "{B4602766-EB1F-4FD4-958E-FD114A0B81AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServeurSide.Tests", "ServeurSide.Tests\ServeurSide.Tests.csproj", "{B0DF1B45-DFE4-45FA-A2A2-B1D43EAB5C95}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStorer", "MusicStorer\MusicStorer.csproj", "{3B881F31-B4E7-4410-ADB7-09CB563DB227}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAccess", "DbAccess\DbAccess.csproj", "{D6CD176D-D99B-4542-9D6B-FA4B0F96CB31}"
@@ -21,10 +19,6 @@ Global
 		{B4602766-EB1F-4FD4-958E-FD114A0B81AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4602766-EB1F-4FD4-958E-FD114A0B81AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4602766-EB1F-4FD4-958E-FD114A0B81AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0DF1B45-DFE4-45FA-A2A2-B1D43EAB5C95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0DF1B45-DFE4-45FA-A2A2-B1D43EAB5C95}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0DF1B45-DFE4-45FA-A2A2-B1D43EAB5C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0DF1B45-DFE4-45FA-A2A2-B1D43EAB5C95}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B881F31-B4E7-4410-ADB7-09CB563DB227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B881F31-B4E7-4410-ADB7-09CB563DB227}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B881F31-B4E7-4410-ADB7-09CB563DB227}.Release|Any CPU.ActiveCfg = Release|Any CPU
