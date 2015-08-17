@@ -235,6 +235,7 @@
     <Content Include="Scripts\mp3.js" />
     <Content Include="Scripts\ui\respond.js" />
     <Content Include="Scripts\ui\respond.min.js" />
+    <Content Include="Views\artistList.html" />
     <Content Include="Views\lecteur.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -260,6 +261,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app.ts" />
+    <TypeScriptCompile Include="Scripts\ArtistList.ts" />
     <TypeScriptCompile Include="Scripts\Aurora.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular2\angular2.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular2\router.d.ts" />
@@ -321,7 +323,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50522</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
