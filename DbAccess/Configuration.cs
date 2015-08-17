@@ -9,7 +9,7 @@ namespace DbAccess
     public static class Configuration
     {
         //public static string DatabasePath = @"database.db";
-        public static string DatabasePath = @"C:\Users\Portable\test\database.db";
+        public static string DatabasePath = @"C:\Users\bichona\Documents\GitHubVisualStudio\AuroraFooling\database.db";
 
         private static string _connectionStringPattern = "Data Source={0};Version=3;";
 
