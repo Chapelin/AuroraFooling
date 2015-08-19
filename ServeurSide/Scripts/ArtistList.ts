@@ -1,8 +1,10 @@
 ﻿/// <reference path="typings/angular2/angular2.d.ts" />
-import {Component, View, bootstrap, NgFor} from 'angular2/angular2';
+/// <reference path="ArtistService.ts" />
+import {Component, View, bootstrap, NgFor, Inject} from 'angular2/angular2';
 @Component(
     {
-        selector: 'artistlist'
+        selector: 'artistlist',
+        hostInjector: [ArtistService]
     })
 @View({
         templateUrl: 'Views/artistList.html',
@@ -11,14 +13,9 @@ import {Component, View, bootstrap, NgFor} from 'angular2/angular2';
 class ListOfArtists {
     artists: string[];
 
-    constructor() {
-        this.artists = ["Test A", "Test b", "Test c"];
+    constructor( @Inject(ArtistService) art: ArtistService) {
+        this.artists = art.getArtists();
     }
-
-   
-
-
-
 }
 
 bootstrap(ListOfArtists);
