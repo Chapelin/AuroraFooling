@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace ServeurSide
@@ -10,7 +11,8 @@ namespace ServeurSide
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+            var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
+            config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
             // Web API routes
             config.MapHttpAttributeRoutes();
 
